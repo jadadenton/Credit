@@ -1,0 +1,60 @@
+package com.company;
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter Credit Card Number");
+        String num = input.nextLine();
+
+        ArrayList<Integer> cardnum = new ArrayList<Integer>();
+
+        for (int i = 0; i < num.length() ; i++) {
+            int credit = Integer.parseInt("" + num.charAt(i));
+            cardnum.add(credit);
+        }
+        ArrayList<Integer> checksum = new ArrayList<Integer>();
+
+        int sum=0;
+        String product = "";
+
+        for (int i = cardnum.size()-2; i >= 0; i=i-2) {
+            int val = cardnum.get(i);
+            String mul = "" + (val * 2);
+            product += mul;
+        }
+
+
+        for (int k = 0; k < product.length(); k++) {
+            int credit2 = Integer.parseInt("" + product.charAt(k));
+            sum +=credit2;
+
+
+        }
+
+        int totalSum = sum;
+        for (int j = cardnum.size()-1; j >=0; j=j-2) {
+            int val = cardnum.get(j);
+            totalSum += val;
+        }
+            if (totalSum % 10 == 0) {
+                if (num.length() == 15 && num.charAt(0) == '3' && (num.charAt(1) == '4' || num.charAt(1) == '7')) {
+                    System.out.println("AMEX");
+                } else if (num.length() == 16 && num.charAt(0) == '5' &&
+                        (num.charAt(1) == '1' || num.charAt(1) == '2' || num.charAt(1) == '3' || num.charAt(1) == '4' || num.charAt(1) == '5')) {
+                    System.out.println("MasterCard");
+                }else if ((num.length() == 13 || num.length() == 16)  && num.charAt(0) == '4') {
+                    System.out.println("Visa");
+                } else {
+                    System.out.println("Invalid ");
+                }
+
+            }
+            
+    }
+
+}
